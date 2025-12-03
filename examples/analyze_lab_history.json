@@ -1,0 +1,48 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "analyze_lab_history",
+    "arguments": {
+      "user_profile": {
+        "age": 55,
+        "sex": "male",
+        "race": "white",
+        "smoking_status": "never"
+      },
+      "lab_history": [
+        {
+          "date": "2024-01-15",
+          "context": "Annual physical",
+          "labs": {
+            "glucose": 95,
+            "hba1c": 5.4,
+            "cholesterol_total": 190,
+            "ldl": 120,
+            "hdl": 48,
+            "triglycerides": 140,
+            "creatinine": 1.0,
+            "alt": 25,
+            "ast": 28
+          }
+        },
+        {
+          "date": "2024-06-10",
+          "context": "Follow-up labs",
+          "labs": {
+            "glucose": 102,
+            "hba1c": 5.7,
+            "cholesterol_total": 200,
+            "ldl": 130,
+            "hdl": 45,
+            "triglycerides": 150,
+            "creatinine": 1.1,
+            "alt": 28,
+            "ast": 32
+          }
+        }
+      ]
+    }
+  }
+}

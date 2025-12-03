@@ -1,0 +1,31 @@
+{
+  "name": "health-guild-models",
+  "version": "1.0.0",
+  "description": "Open-source clinical calculators and MCP tools for transparent health risk modeling",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [
+    "health",
+    "clinical-calculators",
+    "risk-scores",
+    "mcp",
+    "model-context-protocol",
+    "ascvd",
+    "fib4",
+    "egfr",
+    "transparent-medicine",
+    "open-science"
+  ],
+  "author": "Health Guild",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nate22Dawgg/health-guild-models.git"
+  },
+  "scripts": {
+    "test": "echo \"Tests not yet implemented\" && exit 0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

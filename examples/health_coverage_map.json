@@ -1,0 +1,30 @@
+{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+    "name": "health_coverage_map",
+    "arguments": {
+      "user_profile": {
+        "age": 55,
+        "sex": "male",
+        "race": "white",
+        "smoking_status": "never"
+      },
+      "lab_history": [
+        {
+          "date": "2024-06-10",
+          "context": "Recent labs",
+          "labs": {
+            "glucose": 102,
+            "hba1c": 5.7,
+            "cholesterol_total": 200,
+            "ldl": 130,
+            "hdl": 45,
+            "triglycerides": 150
+          }
+        }
+      ]
+    }
+  }
+}

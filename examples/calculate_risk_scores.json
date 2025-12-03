@@ -1,0 +1,33 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "calculate_risk_scores",
+    "arguments": {
+      "user_profile": {
+        "age": 55,
+        "sex": "male",
+        "race": "white",
+        "smoking_status": "never"
+      },
+      "labs": {
+        "glucose": 102,
+        "hba1c": 5.7,
+        "cholesterol_total": 200,
+        "ldl": 130,
+        "hdl": 45,
+        "triglycerides": 150,
+        "systolic_bp": 130,
+        "diastolic_bp": 85,
+        "creatinine": 1.1,
+        "alt": 28,
+        "ast": 32,
+        "platelets": 220,
+        "albumin": 4.2,
+        "bilirubin": 0.8,
+        "fasting_insulin": 12
+      }
+    }
+  }
+}
