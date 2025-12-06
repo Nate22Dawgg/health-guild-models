@@ -89,3 +89,51 @@ export function ckdStageDescription(stage: string): CKDStageInfo {
 
   return descriptions[stage] || { stage, description: 'Unknown', egfrRange: 'N/A' }
 }
+
+/**
+ * BUN/Creatinine Ratio Calculator
+ * Helps differentiate types of kidney dysfunction
+ * Evidence: Tier A (standard clinical practice)
+ */
+export interface BUNCreatinineRatioResult {
+  ratio: number
+  interpretation: string
+  category: 'normal' | 'prerenal' | 'renal' | 'postrenal'
+  clinical_significance: string
+}
+
+export function calculateBUNCreatinineRatio(bun: number, creatinine: number): BUNCreatinineRatioResult {
+  if (bun <= 0 || creatinine <= 0) {
+    throw new Error('BUN and creatinine must be positive values')
+  }
+
+  const ratio = bun / creatinine
+  let interpretation: string
+  let category: 'normal' | 'prerenal' | 'renal' | 'postrenal'
+  let clinical_significance: string
+
+  if (ratio >= 10 && ratio <= 20) {
+    category = 'normal'
+    interpretation = 'Normal kidney function'
+    clinical_significance = 'BUN and creatinine are rising proportionally, suggesting normal kidney metabolism.'
+  } else if (ratio > 20) {
+    category = 'prerenal'
+    interpretation = 'Elevated ratio suggests prerenal azotemia'
+    clinical_significance = 'Possible causes: dehydration, heart failure, high protein diet, GI bleeding, or decreased kidney perfusion. BUN rises faster than creatinine.'
+  } else if (ratio < 10) {
+    category = 'renal'
+    interpretation = 'Low ratio may suggest intrinsic kidney disease or liver dysfunction'
+    clinical_significance = 'Possible causes: acute tubular necrosis, liver disease, malnutrition, or overhydration. Creatinine rises faster than BUN.'
+  } else {
+    category = 'normal'
+    interpretation = 'Normal range'
+    clinical_significance = 'Ratio within expected range.'
+  }
+
+  return {
+    ratio: Number(ratio.toFixed(1)),
+    interpretation,
+    category,
+    clinical_significance
+  }
+}

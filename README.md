@@ -19,6 +19,45 @@ This repository contains the **scientific core** of Health Guild—all clinical 
 
 ---
 
+## 🔀 Fork-Aware Architecture
+
+### **How This Repo Works**
+
+This is a **transparency snapshot** of the production models, NOT the source of truth.
+
+**The Strategy**:
+1. ✅ **Private Platform**: Production app uses private models (can evolve independently)
+2. ✅ **Public Repo**: Periodic snapshots copied here for transparency
+3. ✅ **Fork Detection**: Platform tracks if public/private models have diverged
+4. ✅ **User Choice**: Future feature to let users choose public vs private models
+
+### **Why This Approach?**
+
+**Protection**: Private models can evolve without breaking production
+- Bug fixes don't wait for public review
+- Security patches can be applied immediately
+- Model improvements tested privately first
+
+**Transparency**: Public models show what we're using
+- Community can audit the math
+- Researchers can verify calculations
+- Users can trust the science
+
+**Flexibility**: Models can fork if needed
+- Public: Conservative, well-vetted versions
+- Private: Latest improvements and features
+- Dashboard shows similarity percentage
+
+### **Version Tracking**
+
+See [VERSION.md](./VERSION.md) for:
+- Last sync timestamp
+- Which files are synced
+- What's kept private (orchestrators, LLM, frontend)
+- How to detect divergence
+
+---
+
 ## 📦 Repository Structure
 
 ```

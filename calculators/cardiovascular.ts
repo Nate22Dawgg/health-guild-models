@@ -154,3 +154,103 @@ export function pooledCohortASCVD(params: ASCVDParams): ASCVDResult {
     percentage: Number((riskScore * 100).toFixed(2))
   }
 }
+
+/**
+ * Triglyceride/HDL Ratio Calculator
+ * Strong predictor of insulin resistance and metabolic syndrome
+ * Evidence: Tier B (validated research)
+ */
+export interface TGHDLRatioResult {
+  ratio: number
+  interpretation: string
+  category: 'excellent' | 'good' | 'moderate' | 'high'
+  insulin_resistance_risk: string
+}
+
+export function calculateTGHDLRatio(triglycerides: number, hdl: number): TGHDLRatioResult {
+  if (triglycerides <= 0 || hdl <= 0) {
+    throw new Error('Triglycerides and HDL must be positive values')
+  }
+
+  const ratio = triglycerides / hdl
+  let interpretation: string
+  let category: 'excellent' | 'good' | 'moderate' | 'high'
+  let insulin_resistance_risk: string
+
+  if (ratio < 2) {
+    category = 'excellent'
+    interpretation = 'Low ratio indicates good insulin sensitivity'
+    insulin_resistance_risk = 'Low risk of insulin resistance. Excellent metabolic health marker.'
+  } else if (ratio >= 2 && ratio < 3) {
+    category = 'good'
+    interpretation = 'Acceptable ratio, generally good metabolic health'
+    insulin_resistance_risk = 'Low to moderate risk. Continue healthy lifestyle habits.'
+  } else if (ratio >= 3 && ratio < 4) {
+    category = 'moderate'
+    interpretation = 'Elevated ratio suggests emerging insulin resistance'
+    insulin_resistance_risk = 'Moderate risk of insulin resistance. Lifestyle modifications recommended.'
+  } else {
+    category = 'high'
+    interpretation = 'High ratio indicates insulin resistance and metabolic syndrome risk'
+    insulin_resistance_risk = 'High risk of insulin resistance and metabolic syndrome. Medical evaluation and aggressive lifestyle changes recommended.'
+  }
+
+  return {
+    ratio: Number(ratio.toFixed(2)),
+    interpretation,
+    category,
+    insulin_resistance_risk
+  }
+}
+
+/**
+ * Non-HDL Cholesterol Calculator
+ * Better predictor of cardiovascular risk than LDL alone
+ * Evidence: Tier A (ACC/AHA guidelines)
+ */
+export interface NonHDLCholesterolResult {
+  non_hdl: number
+  interpretation: string
+  category: 'optimal' | 'near_optimal' | 'borderline' | 'high' | 'very_high'
+  clinical_significance: string
+}
+
+export function calculateNonHDLCholesterol(total_cholesterol: number, hdl: number): NonHDLCholesterolResult {
+  if (total_cholesterol <= 0 || hdl <= 0) {
+    throw new Error('Total cholesterol and HDL must be positive values')
+  }
+
+  const non_hdl = total_cholesterol - hdl
+  let interpretation: string
+  let category: 'optimal' | 'near_optimal' | 'borderline' | 'high' | 'very_high'
+  let clinical_significance: string
+
+  if (non_hdl < 130) {
+    category = 'optimal'
+    interpretation = 'Optimal non-HDL cholesterol'
+    clinical_significance = 'Excellent cardiovascular risk profile. Non-HDL captures all atherogenic particles (LDL, VLDL, IDL).'
+  } else if (non_hdl >= 130 && non_hdl < 160) {
+    category = 'near_optimal'
+    interpretation = 'Near optimal non-HDL cholesterol'
+    clinical_significance = 'Acceptable for most individuals. Consider lifestyle modifications for primary prevention.'
+  } else if (non_hdl >= 160 && non_hdl < 190) {
+    category = 'borderline'
+    interpretation = 'Borderline high non-HDL cholesterol'
+    clinical_significance = 'Increased cardiovascular risk. Lifestyle changes recommended, medication may be considered based on overall risk.'
+  } else if (non_hdl >= 190 && non_hdl < 220) {
+    category = 'high'
+    interpretation = 'High non-HDL cholesterol'
+    clinical_significance = 'Significantly elevated cardiovascular risk. Aggressive lifestyle modifications and likely statin therapy recommended.'
+  } else {
+    category = 'very_high'
+    interpretation = 'Very high non-HDL cholesterol'
+    clinical_significance = 'Very high cardiovascular risk. Immediate medical intervention with statin therapy strongly recommended.'
+  }
+
+  return {
+    non_hdl,
+    interpretation,
+    category,
+    clinical_significance
+  }
+}
